@@ -3,7 +3,7 @@ html, body{
   padding: 0;
 }
 h3{
-  color: white;
+ color: white;
 }
 .formulairedecontact{
 display: flex;
@@ -28,9 +28,10 @@ flex-direction: column;
   display: flex;
   align-items: center;
   justify-content: center;
+   color: white;
 }
 .ListeDesContacts{
-      box-shadow:rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+      box-shadow:rgb(161, 159, 159) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
 }
 .parent{
   width: 40%;
@@ -59,7 +60,85 @@ textarea ,label,input{
   display: flex;
   gap: 20px;
   
+  
 }
+
+.container{
+  width: 100%;
+ 
+
+}
+
+.col{
+width: 183px;
+height: 24px;
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height */
+color: #1f1e1e;
+text-align: left;
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+}
+.col1{
+  text-align: right;
+  cursor: pointer;
+  
+}
+.b1{
+  cursor: pointer;
+}
+.bi{
+  color: red; 
+  cursor: pointer;
+}
+.phone{
+  width: 74px;
+height: 21px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 21px;
+/* identical to box height */
+
+
+color: #555555;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 1;
+flex-grow: 0;
+}
+.paragraph{
+ width: 511px;
+height: 54px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 18px;
+
+color: #555555;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 2;
+flex-grow: 0;
+}
+
+
 /* Bouton */
 .bout1{
   appearance: none;
@@ -132,3 +211,11 @@ transition-duration: .35s;
   margin-left: 20px;
 }
 
+@media screen and (max-width: 800px) {
+  .container {
+    margin: 1em 2em;
+  }
+  .ListeDesContacts{
+    margin: auto;
+  }
+}
