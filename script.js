@@ -25,22 +25,9 @@ let contacts=[
     'bio':'Bonjour le monde',
     'photo': 'photo.jpg'}
 ]
-function supprimerContact(id,contacts){
-    contacts.forEach(contact => {
-        if(contact['id'] == id)
-       {
-        contacts.splice(contact['id']);
-        afficherContacte(contacts); 
-       }
-    });
   
-}
-
-    
-   
 function afficherContacte()
 {
-    console.log(contacts); 
 let listeContacts= document.getElementById('col');
 let i=0;
 let body= document.body;
@@ -51,6 +38,7 @@ let body= document.body;
             let aModifier =document.createElement("a");
             let iSupprimer =document.createElement("i");
             let iModifier =document.createElement("i");
+            div.className = 'contact';
             listeContacts.append(div);
             div.append(aSupprimer);
             div.append(aModifier);
@@ -60,6 +48,7 @@ let body= document.body;
             iSupprimer.className = 'fa-solid fa-trash';
             iModifier.className = 'fa-solid fa-pen-to-square';
             lienSetAttribut=document.getElementsByClassName('a');
+            divContact=document.getElementsByClassName('contact');
             aModifier.setAttribute('href','#');
             aSupprimer.setAttribute('href','#');
             iSupprimer.textContent= contacts[i]['id'];
@@ -70,10 +59,59 @@ let body= document.body;
                    {
                     contacts.splice(contact['id'],1);
                     div.remove(aSupprimer);
-                    console.log(contacts); 
+                    
                    }
                 });
                 
+
+            } ); 
+            iModifier.addEventListener('click', ()=>{
+              
+             
+               contacts.forEach(contact => {
+                if(contact['id'] == iModifier.textContent)
+               {
+                // Affichage des informations dans le formulaire du contact selectionner
+                document.getElementById('Id').value = contact['id'] ;
+                document.getElementById('Prenom').value = contact['prenom'] ;
+                document.getElementById('Nom').value = contact['nom'] ;
+                document.getElementById('Telephone').value = contact['telephone'] ;
+                document.getElementById('Groupe').value = contact['groupe'] ;
+                document.getElementById('Bio').value = contact['bio'] ;
+                //document.getElementById('Avatar').value = contact['photo'] ;
+                document.getElementById('Email').value = contact['email'] ;
+                //console.log(contacts)
+                // Recuperation de valeurs des input modifiees
+
+                 const form = document.querySelector("form");
+                form.addEventListener('submit', () =>{
+                    let id = document.getElementById('Id').value;
+                    let prenom = document.getElementById('Prenom').value;
+                    let nom=document.getElementById('Nom').value ;
+                    let telephone=document.getElementById('Telephone').value ;
+                    let groupe=document.getElementById('Groupe').value ;
+                    let bio=document.getElementById('Bio').value ;
+                    let photo=document.getElementById('Avatar').value;
+                    let email=document.getElementById('Email').value ;
+                    let modification ={'id' :id,'prenom': prenom,'nom' : nom,'telephone':telephone,'groupe' : groupe,'email':email,'bio':bio,'photo': photo};
+                   
+                    
+                        if(contact['id'] == iModifier.textContent)
+                       {
+                       var index = contacts.indexOf(contact);
+                        //console.log(index);
+                        contacts.push(modification);
+                        contacts.splice(index,1);
+                    }
+                   
+                    console.log(contacts);
+                    
+                   
+                    
+                });
+
+               }
+            });
 
             } ); 
             
@@ -81,4 +119,6 @@ let body= document.body;
 
         }
 }
+
+
 window.addEventListener("load",afficherContacte());
