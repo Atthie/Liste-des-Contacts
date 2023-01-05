@@ -5,83 +5,75 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Liste des contacts</title>
-  <!-- <link href="style.css" rel="stylesheet" type="text/css" /> -->
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" >
-
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" >
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 </head>
 
 <body>
-  <div class='contenair'>
-   
-      <div class="bg-primary text-white mb-3">  
-        <h3 class="pb-5">LubumbashiDigital</h3> 
-      </div> <br>
-     
-        <div class="d-flex flex-row mb-3 column-gap-4" >
-          <div class="col ">
-            <div class=" bg-primary text-white  text-center " >  
-              <h3 class='pb-5'>Formulaire de contact</h3> 
+    <div class="principale">
+        <div class="mynav">  <h1>Répertoire Des contacts</h1> </div> 
+
+        <div class="total">
+            <div class="parent">
+                 <form action="/send-form">
+                      <div class="mynav1">  <h2>Formulaire de contact</h2> </div>
+
+                        <div class="formulairedecontact"><br>
+
+                                <label class="Prénom" for="firstName"><strong>Prénom</strong></label><br>
+                                <input type="text" id="Prénom" name="firstName" required><br>
+                                <label class="Nom" for="lastName"><strong>Nom</strong></label><br>
+                                <input type="text" id="Nom" name="lastName" required><br>
+                                <label class="Telephone" for="phone"><strong>Telephone</strong></label><br>
+                                <input type="number" id="Telephone" name="phone" required><br>
+                                <label class="groupe" for="group"><strong>Groupe</strong></label><br>
+
+                                <select class="group" name="group" required>
+                                    <option value="select">Sélectionner</option>
+                                    <option value="Ami">Ami</option>
+                                    <option value="Collegue">Collegue</option>
+                                    <option value="Famille">Famille</option>
+                                </select><br>
+
+                                <label class="Email" for="email"><strong>Email</strong></label><br>
+                                <input type="email" id="email" name="email" placeholder="your-email@site.com" required><br>
+                                <label for="bio"><strong>Bio</strong></label><br>
+                                <textarea name="bio" id="bio" class="Bio" cols="30" rows="6"></textarea>
+                                <div class="joinpicture"><label for="avatar">Deposez la photo ici <input type="file" id="avatar" name="file" accept="image/*"></label></div>
+                                <br>
+
+                                <div class="bouton">
+
+                                      <button class="bout1" role="button">Créer</button>
+                                      <button class="bout2" role="button">Rénit</button> <br><br> <br><br>
+
+                                 </div>
+
+
+                        </div>
+                  </form>
+
             </div>
-            <form class="w-">
-             
-              <div class="formulairedecontact">
-                <div class="mb-3">
-                 
-                  <input  class="form-control" type="number" id="Id"   required></textarea>  
-                </div>
-                  <div class="mb-3">
-                    <label class="form-label" class="Prenom" for="story"><strong>Prénom</strong></label>
-                    <input  class="form-control" type="text" id="Prenom"  required></textarea>  
+
+
+                  <div class="ListeDesContacts">
+
+                    <div class="mynav2">  <h3>Liste des contacts</h3> </div> <br>
+
                   </div>
-                  <div class="mb-3">
-                    <label class="form-label" class="Nom" for="story"><strong>Nom</strong></label>
-                    <input  class="form-control" type="text" id="Nom" required></textarea>
-                  </div>
-                  
-                  <div class="mb-3">
-                    <label class="form-label" class="Telephone" for="story"><strong>Telephone</strong></label>
-                    <input  class="form-control" type="number" id="Telephone"required></textarea>
-                   
-                  </div>
-                  <div class="mb-3">
-                    <label class="form-label" class="groupe" for="story"><strong>Groupe</strong></label>
-                    <input  class="form-control"type="text" id="Groupe" required></textarea>
-                    
-                  </div>
-                  <div class="mb-3">
-                    <label class="form-label" class="Email" for="story"><strong>Email</strong></label>
-                    <input   class="form-control"type="email" id="Email" name="email" placeholder="your-email@site.com" required>
-                   
-                  </div>
-                  <div class="mb-3">
-                    <label class="form-label" class="Bio" for="story"><strong>Bio</strong></label>
-                    <input   class="form-control"type="text" id="Bio"required></textarea>                   
-                  </div>
-              </div>
-              <div class="mb-3" class="ajoutphoto">
-                  <label class="form-label" for="avatar">Deposez la photo ici</label>
-                  <input  class="form-control" type="file"id="Avatar" accept="image/png, image/jpeg">
-              </div>
               
-              <div class="bouton">
-                  <button class="bout1" role="button">Créer</button>
-                  <button class="bout2" role="button">Button</button> <br><br> <br><br>
-              </div>
-            </form>
-          </div>
-            <div class="col" id="col">
-              <div class="bg-primary text-white mb-3 text-center">  
-                <h3 class='pb-5'>Liste des contacts</h3> 
-              </div> 
-               
-        </div>
-          
- 
-  </div>
+                  
+         </div>
+
+
+
+
+    </div>
 
     
     
-
+  
   <script src="script.js"></script>
   <script src="https://replit.com/public/js/replit-badge.js" theme="blue" defer></script> 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
