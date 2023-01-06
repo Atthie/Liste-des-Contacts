@@ -1,6 +1,4 @@
-
-
-
+let Contacts=[];
 const form = document.querySelector('form');
 const firstNameInput = document.querySelector('#Prénom');
 const lastNameInput = document.querySelector('#Nom');
@@ -13,8 +11,10 @@ const createButton = document.querySelector('.bout1');
 const resetButton = document.querySelector('.bout2');
 const contactList = document.querySelector('.ListeDesContacts');
 
+
 form.addEventListener('submit', event => {
   event.preventDefault();
+  
   const firstName = firstNameInput.value;
   const lastName = lastNameInput.value;
   const phone = phoneInput.value;
@@ -22,6 +22,7 @@ form.addEventListener('submit', event => {
   const email = emailInput.value;
   const bio = bioInput.value;
   const avatar = avatarInput.files[0];
+  
 
   if (!firstName || !lastName || !phone || !group || !email || !avatar) {
     alert('Tous les champs sont obligatoires !');
@@ -38,7 +39,7 @@ form.addEventListener('submit', event => {
     bio,
     avatar
   };
-
+  Contacts.push(contact);
   
   // Ajout du contact à la liste des contacts
   addContactToList(contact);
@@ -46,11 +47,13 @@ form.addEventListener('submit', event => {
 
   // Réinitialisation du formulaire
   form.reset();
+  resetButton.addEventListener('click', () => {
+    form.reset();
+  });
 });
 
-resetButton.addEventListener('click', () => {
-  form.reset();
-});
+
+
 
 function addContactToList(contact) {
   // Création de l'élément HTML pour le nouveau contact
@@ -59,10 +62,13 @@ function addContactToList(contact) {
 
   // Ajout de l'avatar
   const avatarElement = document.createElement('img');
+//   avatarElement.style.height='200px';
+//   avatarElement.style.width='200px';
   avatarElement.src = URL.createObjectURL(contact.avatar);
   avatarElement.classList.add('avatar');
   contactElement.appendChild(avatarElement);
-
+  
+console.log(contact.avatar);
   // Ajout des informations du contact
   const infoElement = document.createElement('div');
   infoElement.classList.add('info');
@@ -80,6 +86,7 @@ function addContactToList(contact) {
   modifyButton.innerHTML = '<a class="icon iconnoir " href="#"> <i class="fa-solid fa-user-pen"></i></a>';
   modifyButton.classList.add('modify');
   modifyButton.addEventListener('click', () => {
+  
     // Populate the form with the current contact's information
     firstNameInput.value = contact.firstName;
     lastNameInput.value = contact.lastName;
@@ -87,7 +94,8 @@ function addContactToList(contact) {
     groupSelect.value = contact.group;
     emailInput.value = contact.email;
     bioInput.value = contact.bio;
-    avatarInput.value = contact.avatar;
+    avatarInput.value = Object.values(contact.avatar);
+   
   });
   contactElement.appendChild(modifyButton);
 
@@ -124,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     avatarPreview.src = '';
     avatarPreview.classList.add('hidden');
   });
-=======
+
 let contacts=[
     {'id' :0,
      'prenom': 'Emil',
@@ -209,31 +217,28 @@ let body= document.body;
                 //console.log(contacts)
                 // Recuperation de valeurs des input modifiees
 
-                 const form = document.querySelector("form");
+                const form = document.querySelector("form");
                 form.addEventListener('submit', () =>{
-                    let id = document.getElementById('Id').value;
-                    let prenom = document.getElementById('Prenom').value;
-                    let nom=document.getElementById('Nom').value ;
-                    let telephone=document.getElementById('Telephone').value ;
-                    let groupe=document.getElementById('Groupe').value ;
-                    let bio=document.getElementById('Bio').value ;
-                    let photo=document.getElementById('Avatar').value;
-                    let email=document.getElementById('Email').value ;
-                    let modification ={'id' :id,'prenom': prenom,'nom' : nom,'telephone':telephone,'groupe' : groupe,'email':email,'bio':bio,'photo': photo};
+                let id = document.getElementById('Id').value;
+                let prenom = document.getElementById('Prenom').value;
+                let nom=document.getElementById('Nom').value ;
+                let telephone=document.getElementById('Telephone').value ;
+                let groupe=document.getElementById('Groupe').value ;
+                let bio=document.getElementById('Bio').value ;
+                let photo=document.getElementById('Avatar').value;
+                let email=document.getElementById('Email').value ;
+                let modification ={'id' :id,'prenom': prenom,'nom' : nom,'telephone':telephone,'groupe' : groupe,'email':email,'bio':bio,'photo': photo};
+                if(contact['id'] == iModifier.textContent)
+                {
+                    let index = contacts.indexOf(contact);
+                    contacts.push(modification);
+                    contacts.splice(index,1);
+                }
+                   
                    
                     
-                        if(contact['id'] == iModifier.textContent)
-                       {
-                       var index = contacts.indexOf(contact);
-                        //console.log(index);
-                        contacts.push(modification);
-                        contacts.splice(index,1);
-                    }
                    
-                    console.log(contacts);
-                    
-                   
-                    
+
                 });
 
                }
