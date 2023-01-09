@@ -1,5 +1,6 @@
 let Contacts=[];
 const form = document.querySelector('form');
+const idInput = document.querySelector('#Id');
 const firstNameInput = document.querySelector('#Prénom');
 const lastNameInput = document.querySelector('#Nom');
 const phoneInput = document.querySelector('#Telephone');
@@ -9,40 +10,112 @@ const bioInput = document.querySelector('#bio');
 const avatarInput = document.querySelector('#avatar');
 const createButton = document.querySelector('.bout1');
 const resetButton = document.querySelector('.bout2');
-const contactList = document.querySelector('.ListeDesContacts');
+let contactList = document.querySelector('.ListeDesContacts');
+let contactElement = document.createElement('div');
+let avatarElement = document.createElement('img');
+let infoElement = document.createElement('div');
+let confirm;
 
 
 form.addEventListener('submit', event => {
   event.preventDefault();
-  
-  const firstName = firstNameInput.value;
-  const lastName = lastNameInput.value;
-  const phone = phoneInput.value;
-  const group = groupSelect.value;
-  const email = emailInput.value;
-  const bio = bioInput.value;
-  const avatar = avatarInput.files[0];
-  
-
-  if (!firstName || !lastName || !phone || !group || !email || !avatar) {
-    alert('Tous les champs sont obligatoires !');
-    return;
+  console.log( 'debut'+ idInput.value);
+  if(!avatarInput.files[0]){
+    const id = Contacts.length + 1;
+    const firstName = firstNameInput.value;
+    const lastName = lastNameInput.value;
+    const phone = phoneInput.value;
+    const group = groupSelect.value;
+    const email = emailInput.value;
+    const bio = bioInput.value;
+    const avatar ='./avatar.png';
+   
+    const contact = {
+        id,
+        firstName,
+        lastName,
+        phone,
+        group,
+        email,
+        bio,
+        avatar
+      };
+      
+      Contacts.push(contact);
+      if (idInput.value=='new') {
+        addContactToList(contact);
+      } else {
+       
+        editContactToList(contact);
+      }
+      
+  }else
+  {
+    const id = Contacts.length + 1;
+    const firstName = firstNameInput.value;
+    const lastName = lastNameInput.value;
+    const phone = phoneInput.value;
+    const group = groupSelect.value;
+    const email = emailInput.value;
+    const bio = bioInput.value;
+    const avatar = avatarInput.files[0];
+    if (!firstName || !lastName || !phone || !group || !email || !bio ) {
+        alert('Tous les champs sont obligatoires !');
+        return;
+        
+      }
+      const contact = {
+        id,
+        firstName,
+        lastName,
+        phone,
+        group,
+        email,
+        bio,
+        avatar
+      };
+      Contacts.push(contact);
+      if (idInput.value=='new') {
+        addContactToList(contact);
+      } else {
+        
+        editContactToList(contact);
+      }
   }
+ 
+  
+function editContactToList(contact)
+{
+    if (contact.avatar == './avatar.png') {
+        avatarElement.src = contact.avatar;
+        //contactList.removeChild(contactElement);
+      } else {
+        avatarElement.src =  URL.createObjectURL(contact.avatar);
+        //contactList.removeChild(contactElement);
+      }
+      //contactElement.appendChild(avatarElement);
+      infoElement.innerHTML = `
+      <h4>${contact.firstName} ${contact.lastName}</h4>
+      <p>Téléphone: ${contact.phone}</p>
+      <p>Groupe: ${contact.group}</p>
+      <p>Email: <a href="mailto:${contact.email}?subject=Bonjour%20${contact.firstName}%20${contact.lastName}&body=Bonjour%20${contact.firstName},%0A%0A%0A%0A%0A%0A%0A%0AMes%20meilleures%20salutations%0A%0A${contact.lastName}">${contact.email}</a></p>
+      <p>Bio: ${contact.bio}</p>
+      `;
+  
+   // contactElement.appendChild(infoElement);
+
+
+ 
+}
+ 
+
+ 
 
   // Création de l'objet contact avec les données du formulaire
-  const contact = {
-    firstName,
-    lastName,
-    phone,
-    group,
-    email,
-    bio,
-    avatar
-  };
-  Contacts.push(contact);
+ 
   
   // Ajout du contact à la liste des contacts
-  addContactToList(contact);
+ 
 
 
   // Réinitialisation du formulaire
@@ -55,22 +128,33 @@ form.addEventListener('submit', event => {
 
 
 
+
+
+
 function addContactToList(contact) {
   // Création de l'élément HTML pour le nouveau contact
-  const contactElement = document.createElement('div');
+  contactElement = document.createElement('div');
+  
   contactElement.classList.add('contact');
 
   // Ajout de l'avatar
-  const avatarElement = document.createElement('img');
+  avatarElement = document.createElement('img');
 //   avatarElement.style.height='200px';
 //   avatarElement.style.width='200px';
-  avatarElement.src = URL.createObjectURL(contact.avatar);
+  if (contact.avatar == './avatar.png') {
+    avatarElement.src = contact.avatar;
+    //contactList.removeChild(contactElement);
+  } else {
+    avatarElement.src =  URL.createObjectURL(contact.avatar);
+    //contactList.removeChild(contactElement);
+  }
+  
   avatarElement.classList.add('avatar');
   contactElement.appendChild(avatarElement);
-  
-console.log(contact.avatar);
+  infoElement = document.createElement('div');
+
   // Ajout des informations du contact
-  const infoElement = document.createElement('div');
+  
   infoElement.classList.add('info');
   infoElement.innerHTML = `
     <h4>${contact.firstName} ${contact.lastName}</h4>
@@ -80,33 +164,57 @@ console.log(contact.avatar);
     <p>Bio: ${contact.bio}</p>
     `;
   contactElement.appendChild(infoElement);
+ 
 
+ 
   // Ajout du bouton de modification
   const modifyButton = document.createElement('button');
   modifyButton.innerHTML = '<a class="icon iconnoir " href="#"> <i class="fa-solid fa-user-pen"></i></a>';
   modifyButton.classList.add('modify');
   modifyButton.addEventListener('click', () => {
-  
+ 
     // Populate the form with the current contact's information
-    firstNameInput.value = contact.firstName;
-    lastNameInput.value = contact.lastName;
-    phoneInput.value = contact.phone;
-    groupSelect.value = contact.group;
-    emailInput.value = contact.email;
-    bioInput.value = contact.bio;
-    avatarInput.value = Object.values(contact.avatar);
-   
+    if (contact.avatar == './avatar.png') {
+        idInput.value=contact.id;
+        firstNameInput.value = contact.firstName;
+        lastNameInput.value = contact.lastName;
+        phoneInput.value = contact.phone;
+        groupSelect.value = contact.group;
+        emailInput.value = contact.email;
+        bioInput.value = contact.bio;
+        avatarInput.value = contact.avatar;
+        
+      } else {
+        idInput.value=contact.id;
+        firstNameInput.value = contact.firstName;
+        lastNameInput.value = contact.lastName;
+        phoneInput.value = contact.phone;
+        groupSelect.value = contact.group;
+        emailInput.value = contact.email;
+        bioInput.value = contact.bio;
+        avatarInput.value = URL.createObjectURL(contact.avatar);
+        //contactList.removeChild(contactElement);
+      }
+
+    
   });
   contactElement.appendChild(modifyButton);
-
+  
   // Ajout du bouton de suppression
-  const deleteButton = document.createElement('button');
-  deleteButton.innerHTML = ' <a class="icon iconred " href="#"><i class="fa-regular fa-trash-can"></i></a>';
-  deleteButton.classList.add('delete');
-  deleteButton.addEventListener('click', () => {
+  
+      
+      const deleteButton = document.createElement('button');
+      deleteButton.innerHTML = ' <a class="icon iconred " href="#"><i class="fa-regular fa-trash-can"></i></a>';
+      deleteButton.classList.add('delete');
+      deleteButton.addEventListener('click', () => {
+      confirm('Voulez-vous supprimer ce contact?');
+   
     contactList.removeChild(contactElement);
+
   });
   contactElement.appendChild(deleteButton);
+ 
+  
 
   // Ajout du contact à la liste des contacts
   contactList.appendChild(contactElement);
@@ -133,32 +241,9 @@ document.addEventListener('DOMContentLoaded', () => {
     avatarPreview.classList.add('hidden');
   });
 
-let contacts=[
-    {'id' :0,
-     'prenom': 'Emil',
-     'nom' : 'Mulongo',
-     'telephone':'0972389000',
-     'groupe' : 1,
-     'email': 'atthie27@gmail.com',
-    'bio':'Bonjour le monde',
-    'photo': 'photo.jpg'},
-    {'id' :1,
-     'prenom': 'lor',
-     'nom' : 'Mulongo',
-     'telephone':'0972389000',
-     'groupe' : 1,
-     'email': 'atthie27@gmail.com',
-    'bio':'Bonjour le monde',
-    'photo': 'photo.jpg'},
-    {'id' :2,
-     'prenom': 'plamedie',
-     'nom' : 'Mulongo',
-     'telephone':'0972389000',
-     'groupe' : 1,
-     'email': 'atthie27@gmail.com',
-    'bio':'Bonjour le monde',
-    'photo': 'photo.jpg'}
-]
+
+
+ 
   
 function afficherContacte()
 {
