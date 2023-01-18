@@ -1,4 +1,7 @@
 let Contacts=[];
+
+let bouton1 = document.querySelector('.bout1')
+let bouton2 = document.querySelector('.bout2')
 const form = document.querySelector('form');
 const idInput = document.querySelector('#Id');
 const firstNameInput = document.querySelector('#Prénom');
@@ -182,7 +185,18 @@ function addContactToList(contact) {
   modifyButton.innerHTML = '<a class="icon iconnoir " href="#"> <i class="fa-solid fa-user-pen"></i></a>';
   modifyButton.classList.add('modify');
   modifyButton.addEventListener('click', () => {
- 
+
+    bouton1.innerHTML = 'Modifier'
+    bouton2.innerHTML = 'Annuler'
+    // Récuperer le bouton créer et renit 
+     bouton1.addEventListener('click', function(){
+      
+        bouton1.innerHTML = 'Créer'
+        bouton2.innerHTML = 'Rénit'
+     })
+
+
+
     // Populate the form with the current contact's information
 
     if (contact.avatar == './avatar.png') {
@@ -194,6 +208,8 @@ function addContactToList(contact) {
         emailInput.value = contact.email;
         bioInput.value = contact.bio;
         avatarInput.value = contact.avatar;
+
+       
         
       } else {
         idInput.value=contact.id;
@@ -206,8 +222,6 @@ function addContactToList(contact) {
         avatarInput.value = URL.createObjectURL(contact.avatar);
         //contactList.removeChild(contactElement);
       }
-
-    
   });
   contactElement.appendChild(modifyButton);
 
