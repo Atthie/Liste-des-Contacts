@@ -16,6 +16,29 @@ let avatarElement = document.createElement('img');
 let infoElement = document.createElement('div');
 let confirm;
 
+function validPhone(){
+  let Telephone = form.elements.Telephone.value;
+  let phoneRed = /^\d+$/;
+  let validPrefixes = ["084", "085", "080", "089", "081", "082", "083", "099", "097", "097", "090"];
+  if(!phoneRed.test (Telephone)){
+    document.getElementById('Telephone').style.borderColor ='red';
+    document.getElementById('phoneErr').style.color='red';
+    document.getElementById('phoneErr').innerHTML = 'Renseigner un numéro de téléphone valide';
+  }else if (Telephone.length !==14){
+    document.getElementById('Telephne').style.borderColor = 'red';
+    document.getElementById('phoneErr').style.color = 'red';
+    document.getElementById('phoneErr').innerHTML = 'Renseigner un numéro de téléphone avec au moins 10 chiffres';
+  }else if (!validPrefixes.includes(Telephone.substring(0, 3))) {
+    document.getElementById('Telephone').style.borderColor = 'red';
+    document.getElementById('phoneErr').style.color = 'red';
+    document.getElementById('phoneErr').innerHTML = 'Renseigner un numéro de téléphone au format valide';
+  }else{
+    document.getElementById('Telephone').style.borderColor ='';
+    document.getElementById('phoneErr').style.color ='red';
+    document.getElementById('phoneErr').innerHTML = 'Renseigner un numéro de téléphone au format valide';
+  }
+};
+
 
 form.addEventListener('submit', event => {
   event.preventDefault();
@@ -49,8 +72,7 @@ form.addEventListener('submit', event => {
         editContactToList(contact);
       }
       
-  }else
-  {
+  }else {
     const id = Contacts.length + 1;
     const firstName = firstNameInput.value;
     const lastName = lastNameInput.value;
@@ -82,17 +104,20 @@ form.addEventListener('submit', event => {
         editContactToList(contact);
       }
   }
+
  
   
-function editContactToList(contact)
-{
+ function editContactToList(contact){
     if (contact.avatar == './avatar.png') {
         avatarElement.src = contact.avatar;
         //contactList.removeChild(contactElement);
+        
       } else {
         avatarElement.src =  URL.createObjectURL(contact.avatar);
         //contactList.removeChild(contactElement);
       }
+
+      
       //contactElement.appendChild(avatarElement);
       infoElement.innerHTML = `
       <h4>${contact.firstName} ${contact.lastName}</h4>
@@ -101,22 +126,11 @@ function editContactToList(contact)
       <p>Email: <a href="mailto:${contact.email}?subject=Bonjour%20${contact.firstName}%20${contact.lastName}&body=Bonjour%20${contact.firstName},%0A%0A%0A%0A%0A%0A%0A%0AMes%20meilleures%20salutations%0A%0A${contact.lastName}">${contact.email}</a></p>
       <p>Bio: ${contact.bio}</p>
       `;
-  
+
    // contactElement.appendChild(infoElement);
 
 
- 
 }
- 
-
- 
-
-  // Création de l'objet contact avec les données du formulaire
- 
-  
-  // Ajout du contact à la liste des contacts
- 
-
 
   // Réinitialisation du formulaire
   form.reset();
@@ -124,10 +138,6 @@ function editContactToList(contact)
     form.reset();
   });
 });
-
-
-
-
 
 
 
@@ -164,16 +174,17 @@ function addContactToList(contact) {
     <p>Bio: ${contact.bio}</p>
     `;
   contactElement.appendChild(infoElement);
- 
-
+  
  
   // Ajout du bouton de modification
+
   const modifyButton = document.createElement('button');
   modifyButton.innerHTML = '<a class="icon iconnoir " href="#"> <i class="fa-solid fa-user-pen"></i></a>';
   modifyButton.classList.add('modify');
   modifyButton.addEventListener('click', () => {
  
     // Populate the form with the current contact's information
+
     if (contact.avatar == './avatar.png') {
         idInput.value=contact.id;
         firstNameInput.value = contact.firstName;
@@ -199,17 +210,22 @@ function addContactToList(contact) {
     
   });
   contactElement.appendChild(modifyButton);
+
   // Ajout du bouton de suppression
+
       const deleteButton = document.createElement('button');
       deleteButton.innerHTML = ' <a class="icon iconred " href="#"><i class="fa-regular fa-trash-can"></i></a>';
       deleteButton.classList.add('delete');
-      deleteButton.addEventListener('click', () => {
+      deleteButton.addEventListener('click',() => {
       contactList.removeChild(contactElement);
   });
+  
   contactElement.appendChild(deleteButton);
   // Ajout du contact à la liste des contacts
   contactList.appendChild(contactElement);
 }
+
+
 avatarInput.addEventListener('change', event => {
     const avatar = event.target.files[0];
   
@@ -232,7 +248,8 @@ document.addEventListener('DOMContentLoaded', () => {
     avatarPreview.classList.add('hidden');
   });
 
-
+  
+ 
 
  
   
