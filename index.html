@@ -21,19 +21,15 @@
                       <div class="mynav1">  <p>Formulaire de contact</p> </div>
 
                         <div class="formulairedecontact"><br>
+                                
                                 <input type="text" id="Id" name="id" value="new" hidden><br>
                                 <label class="Prénom" for="firstName">Prénom</label><br>
-                                <input type="text" id="Prénom" name="firstName" required><br>
+                                <input type="text" id="Prénom" name="firstName" required minlength="3" maxlength="8" size="10"><br>
                                 <label class="Nom" for="lastName">Nom</label><br>
-                                <input type="text" id="Nom" name="lastName" required><br>
+                                <input type="text" id="Nom" name="lastName" required minlength="4" maxlength="8" size="10" ><br>
                                 <label class="Telephone" for="phone">Telephone</label><br>
-                                <input type="text" id="Telephone" name="phone" required><br>
+                                <input type="text" id="Telephone" name="phone" required minlength="10" maxlength="14" size="14" pattern="^\+[0-9]\d{1,14}$" onblur="validPhone()" ><br>
                                 <label class="groupe" for="group">Groupe</label><br>
-
-
-                               
-
-
                                 <select class="group" name="group" required>
                                     <option value="select">Sélectionner</option>
                                     <option value="Ami">Ami</option>
@@ -42,9 +38,9 @@
                                 </select><br>
 
                                 <label class="Email" for="email">Email</label><br>
-                                <input type="email" id="email" name="email" placeholder="your-email@site.com" required><br>
+                                <input type="email" id="email" name="email" placeholder="email@.com" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"><br>
                                 <label for="bio">Bio</label><br>
-                                <textarea name="bio" id="bio" class="Bio" cols="30" rows="6"></textarea>
+                                <textarea name="bio" id="bio" class="Bio" cols="30" rows="6" required ></textarea>
                                 <div class="joinpicture"><label for="avatar">Deposez la photo ici <input type="file" id="avatar" name="file" accept="image/*"></label></div>
                                 <br>
                                 <div class="bouton">

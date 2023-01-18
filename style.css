@@ -285,6 +285,15 @@ height: 50px;
   color: #555555;
 }
 
+input:invalid:focus{
+  outline:  #FF3838 1px solid;
+  box-shadow: none
+}
+#phoneErr{
+  margin-left: 20px;
+}
+
+
 
 
 
@@ -299,7 +308,7 @@ height: 50px;
 
 
 
-@media screen and (min-width: 350px) and (max-width: 700px) {
+@media screen and (min-width: 350px) and (max-width: 900px) {
   /* styles pour les écrans d'une largeur comprise entre 345 et 600 pixels */
   .principale {
     /* styles pour l'élément .principale */
@@ -388,13 +397,15 @@ height: 50px;
     padding-top: 20px;
     height: 220px;
     font-size: 0.6em;
+    margin-right: -80px;
+    margin-left: 20px;
   }
   .delete{
-    margin-right: 30px;
-    margin-left: 5px;
+    margin-right: 10px;
+    margin-left: 0px;
   }
   .modify{
-    margin-right: 10px;
+    margin-right: 5px;
   }
   
 }
