@@ -290,8 +290,11 @@ input:invalid:focus{
   box-shadow: none
 }
 
-#phoneErr{
+#phoneErr,#prenomErr, #errorEmail, #nomErr{
   margin-left: 20px;
+}
+#bouton{
+  border-bottom: none;
 }
 
 
