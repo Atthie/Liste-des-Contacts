@@ -289,6 +289,7 @@ input:invalid:focus{
   outline:  #FF3838 1px solid;
   box-shadow: none
 }
+
 #phoneErr{
   margin-left: 20px;
 }
@@ -400,12 +401,13 @@ input:invalid:focus{
     margin-right: -80px;
     margin-left: 20px;
   }
+  
+  .modify{
+    margin-right: 5px;
+  }
   .delete{
     margin-right: 10px;
     margin-left: 0px;
-  }
-  .modify{
-    margin-right: 5px;
   }
   
 }
