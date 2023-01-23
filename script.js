@@ -18,7 +18,7 @@ let avatarElement = document.createElement('img');
 let infoElement = document.createElement('div');
 let confirm;
 
-//=======Validation Prenom=========
+//=======First Name Validation=========
 function validPrenom(){
   let prenom = form.elements.Prénom.value
   if (prenom.length < 3) {
@@ -42,7 +42,7 @@ function validPrenom(){
     }
 }
 
-//=============Validation Nom==============
+//=============Name Validation==============
 function validNom(){
   let nom = form.elements.Nom.value
   if (nom.length < 3) {
@@ -66,7 +66,7 @@ function validNom(){
     }
 }
 
-//==========Validation tel=========
+//==========Validation Number=========
 function validPhone(){
   let Telephone = form.elements.Telephone.value;
   let phoneRegex = /^\d+$/;
