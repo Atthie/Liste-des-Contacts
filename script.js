@@ -200,6 +200,8 @@ function AfficherContact()
  
   let i=0;
   while (i< Contacts.length) {
+    const id=Contacts[i].id;
+    
     contactElement = document.createElement('div');
   
     contactElement.classList.add('contact');
@@ -285,11 +287,7 @@ function AfficherContact()
       deleteButton.classList.add('delete');
       deleteButton.addEventListener('click',() => {
         confirmDelete.innerHTML = `<a class="icon iconred btn btn-danger" href="#">Oui</a>`;
-        confirmDelete.addEventListener('click', function(){
-          
-          const div = div.closest(div)
-          contactElement.remove();
-        });
+        confirmDelete.addEventListener('click', SupprimerContact(id));
 
   });
 
@@ -396,6 +394,11 @@ function addContactToList(contact) {
   // contactElement.appendChild(deleteButton);
   // //=========== Ajout du contact à la liste des contacts=========
   // contactList.appendChild(contactElement);
+  AfficherContact();
+}
+function SupprimerContact(idContact)
+{
+  Contacts.splice(idContact,1);
   AfficherContact();
 }
 
