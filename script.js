@@ -1,4 +1,6 @@
 const form  = document.querySelector('form');
+const Id = document.querySelector('#id');
+let id= form.elements.id.value
 const ListeDesContacts = document.querySelector('.ListeDesContacts');
 const firstNameInput = document.querySelector('#Prénom');
 const lastNameInput = document.querySelector('#Nom');
@@ -218,9 +220,12 @@ join_picture.addEventListener('drop', (event) => {
 
 form.addEventListener('submit', (event)=>{
   event.preventDefault();
+ 
+  document.getElementById('id').value = tab.length;
   const contacts = Object.fromEntries(new FormData(form)) ;
-
+console.log(contacts);
   if(Object.keys(Erreurs).length === 0 ){
+
     tab.push(contacts)
     console.log(tab)
     afficher()
@@ -240,13 +245,14 @@ function afficher(){
     const div = document.createElement('div')
     div.classList.add('info')
     div.innerHTML = `
+     
       <h4>${contact.firstName} ${contact.lastName}</h4>
       <p>Téléphone: ${contact.phone}</p>
       <p>Groupe: ${contact.group}</p>
       <p>Email: <a href="mailto:${contact.email}?subject=Bonjour%20${contact.firstName}%20${contact.lastName}&body=Bonjour%20${contact.firstName},%0A%0A%0A%0A%0A%0A%0A%0AMes%20meilleures%20salutations%0A%0A${contact.lastName}">${contact.email}</a></p>
       <p>Bio: ${contact.bio}</p>
       <div class="Icons">
-      <button class="modify" > <a class="icon iconnoir " href="#"> <i class="fa-solid fa-user-pen"></i></a></button>
+      <button class="modify"  onclick = "edit(${index})"> <a class="icon iconnoir " href="#"> <i class="fa-solid fa-user-pen"></i></a></button>
       <button class="delete" onclick = "deleteElement(${index})" > <a class="icon iconred " href="#"><i class="fa-regular fa-trash-can"></i></a></button> 
       </div>
     `
@@ -256,8 +262,26 @@ function afficher(){
 }
 
 function deleteElement(valeur){
-  tab.splice(valeur,1)
-  afficher()
+  let text = "Voulez vous supprimez ce contact?";
+  if (confirm(text) == true) {
+    tab.splice(valeur,1)
+    afficher()
+  } 
+ 
+ 
+}
+
+function edit(valeur)
+{
+  const selectEdit= tab.filter(edit => edit.id == valeur);
+  document.getElementById('id').value = edit.id;
+  document.querySelector('#Prénom');
+  document.querySelector('#Nom');
+  document.querySelector('#Telephone');
+  document.querySelector('.group');
+  document.querySelector('#email');
+  document.querySelector('#bio');
+     
 }
 
    
