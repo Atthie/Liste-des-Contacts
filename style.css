@@ -127,6 +127,16 @@ textarea ,label,input{
   padding-top: 25px;
   gap: 0px;
   margin-left: 40px;
+  display: flex;
+  flex-direction: row;
+}
+.detail{
+  height: 300px;
+  width: 700px;
+  padding-top: 25px;
+  gap: 0px;
+  margin-left: 40px;
+  
 }
 h4{
   padding-bottom: 0;

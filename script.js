@@ -1,4 +1,3 @@
-
 let Contacts=[];
 let bouton1 = document.querySelector('.bout1')
 let bouton2 = document.querySelector('.bout2')
@@ -14,6 +13,8 @@ const avatarInput = document.querySelector('#avatar');
 const createButton = document.querySelector('.bout1');
 const resetButton = document.querySelector('.bout2');
 let contactList = document.querySelector('.ListeDesContacts');
+let toutContact = document.querySelector('.ToutContacts');
+
 let contactElement = document.createElement('div');
 let avatarElement = document.createElement('img');
 let infoElement = document.createElement('div');
@@ -111,6 +112,7 @@ function validEmail() {
 form.addEventListener('submit', event => {
   //window.location.reload();
   event.preventDefault();
+  //toutContact.remove();
   console.log( 'debut'+ idInput.value);
   if(!avatarInput.files[0]){
     const id = Contacts.length + 1;
@@ -195,49 +197,46 @@ form.addEventListener('submit', event => {
     form.reset();
   });
 });
-function AfficherContact()
+function AfficherContact(Contacts)
 {
- 
+  let toutContact = document.querySelector('.ToutContacts');
+  let contactElement = document.createElement('div');
+
+  let infoElement = document.createElement('div');
   let i=0;
+  
+ 
   while (i< Contacts.length) {
-    const id=Contacts[i].id;
     
+    const id=Contacts[i].id;
     contactElement = document.createElement('div');
-  
     contactElement.classList.add('contact');
-  
-  
-    contactElement.classList.add('contact');
-    avatarElement.classList.add('avatar');
-    contactElement.appendChild(avatarElement);
+    
+    //avatarElement.classList.add('avatar');
+   
     infoElement = document.createElement('div');
 
   //==============Ajout de l'avatar==============
-  avatarElement = document.createElement('img');
+ 
   if (Contacts[i].avatar == './avatar.png') {
     avatarElement.src = Contacts[i].avatar;
-    
   } else {
     avatarElement.src =  URL.createObjectURL(Contacts[i].avatar);
   }
-  
-  avatarElement.classList.add('avatar');
-  contactElement.appendChild(avatarElement);
+ 
   infoElement = document.createElement('div');
-   
     infoElement.classList.add('info');
     infoElement.innerHTML = `
-      <h6>${Contacts[i].firstName} ${Contacts[i].lastName}</h6>
+      <div><img  src="${avatarElement.src}" class='avatar'></div >
+      <div class='detail'><h6>${Contacts[i].firstName} ${Contacts[i].lastName}</h6>
       <p>Téléphone: ${Contacts[i].phone}</p>
       <p>Groupe: ${Contacts[i].group}</p>
       <p>Email: <a href="mailto:${Contacts[i].email}?subject=Bonjour%20${Contacts[i].firstName}%20${Contacts[i].lastName}&body=Bonjour%20${Contacts[i].firstName},%0A%0A%0A%0A%0A%0A%0A%0AMes%20meilleures%20salutations%0A%0A${Contacts[i].lastName}">${Contacts[i].email}</a></p>
-      <p>Bio: ${Contacts[i].bio}</p>
+      <p>Bio: ${Contacts[i].bio}</p></div>
       `;
-     
-    
   contactElement.appendChild(infoElement);
   
- 
+  console.log(contactElement);
   // =============Ajout du bouton de modification============
 
   const modifyButton = document.createElement('button');
@@ -293,113 +292,38 @@ function AfficherContact()
 
   contactElement.appendChild(deleteButton);
   //=========== Ajout du contact à la liste des contacts=========
-  contactList.appendChild(contactElement);
-    
+  toutContact.appendChild(contactElement);
+
+
     i++;
 
+  
   }
+  
  
 }
 function addContactToList(contact) {
   Contacts.push(contact);
-  // // ============Création de l'élément HTML pour le nouveau contact=============
-  // contactElement = document.createElement('div');
-  
-  // contactElement.classList.add('contact');
-
-  // //==============Ajout de l'avatar==============
-  // avatarElement = document.createElement('img');
-  // if (contact.avatar == './avatar.png') {
-  //   avatarElement.src = contact.avatar;
-    
-  // } else {
-  //   avatarElement.src =  URL.createObjectURL(contact.avatar);
-  // }
-  
-  // avatarElement.classList.add('avatar');
-  // contactElement.appendChild(avatarElement);
-  // infoElement = document.createElement('div');
-
-  // // ========Ajout des informations du contact==============
-  
-  // infoElement.classList.add('info');
-  // infoElement.innerHTML = `
-  //   <h4>${contact.firstName} ${contact.lastName}</h4>
-  //   <p>Téléphone: ${contact.phone}</p>
-  //   <p>Groupe: ${contact.group}</p>
-  //   <p>Email: <a href="mailto:${contact.email}?subject=Bonjour%20${contact.firstName}%20${contact.lastName}&body=Bonjour%20${contact.firstName},%0A%0A%0A%0A%0A%0A%0A%0AMes%20meilleures%20salutations%0A%0A${contact.lastName}">${contact.email}</a></p>
-  //   <p>Bio: ${contact.bio}</p>
-  //   `;
-
-  // contactElement.appendChild(infoElement);
-  
+  if (Contacts.length > 0) {
+    console.log(Contacts);
+    toutContact.remove();
+    AfficherContact(Contacts);
+  }else{
+    AfficherContact(Contacts);
+  }
  
-  // // =============Ajout du bouton de modification============
-
-  // const modifyButton = document.createElement('button');
-  // modifyButton.innerHTML = '<a class="icon iconnoir " href="#"> <i class="fa-solid fa-user-pen"></i></a>';
-  // modifyButton.classList.add('modify');
-  // modifyButton.addEventListener('click', () => {
-
-  //   bouton1.innerHTML = 'Modifier'
-  //   bouton2.innerHTML = 'Annuler'
-  //   // ===========Récuperer le bouton créer et renit ==============
-  //    bouton1.addEventListener('click', function(){
-      
-  //       bouton1.innerHTML = 'Créer'
-  //       bouton2.innerHTML = 'Rénit'
-  //    })
-     
-  //   //============== Populate the form with the current contact's information============
-
-  //   if (contact.avatar == './avatar.png') {
-  //       idInput.value=contact.id;
-  //       firstNameInput.value = contact.firstName;
-  //       lastNameInput.value = contact.lastName;
-  //       phoneInput.value = contact.phone;
-  //       groupSelect.value = contact.group;
-  //       emailInput.value = contact.email;
-  //       bioInput.value = contact.bio;
-  //       avatarInput.value = contact.avatar; 
-  //     } else {
-  //       idInput.value=contact.id;
-  //       firstNameInput.value = contact.firstName;
-  //       lastNameInput.value = contact.lastName;
-  //       phoneInput.value = contact.phone;
-  //       groupSelect.value = contact.group;
-  //       emailInput.value = contact.email;
-  //       bioInput.value = contact.bio;
-  //       avatarInput.value = URL.createObjectURL(contact.avatar);
-  //     }
-  // });
-  // contactElement.appendChild(modifyButton);
-
-  // // =========Ajout du bouton de suppression=============
-
-  //     const deleteButton = document.createElement('button');
-  //     const confirmDelete = document.getElementById('button')
-
-  //     deleteButton.innerHTML = ' <a class="icon iconred " id = "buttonDelete" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-regular fa-trash-can" ></i></a>';
-  //     deleteButton.classList.add('delete');
-  //     deleteButton.addEventListener('click',() => {
-  //       confirmDelete.innerHTML = `<a class="icon iconred btn btn-danger" href="#">Oui</a>`;
-  //       confirmDelete.addEventListener('click', function(){
-          
-  //         const div = div.closest(div)
-  //         contactElement.remove();
-  //       });
-
-  // });
-
-  // contactElement.appendChild(deleteButton);
-  // //=========== Ajout du contact à la liste des contacts=========
-  // contactList.appendChild(contactElement);
-  AfficherContact();
+  
 }
 function SupprimerContact(idContact)
 {
-  Contacts.splice(idContact,1);
-  AfficherContact();
+  let item;
+  console.log(Contacts);
+  console.log(idContact);
+  let result =Contacts.filter((item) => item.id !== idContact);
+  console.log(result);
+  
+  AfficherContact(result);
+  
 }
 
 
