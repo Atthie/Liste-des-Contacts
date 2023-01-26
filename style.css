@@ -65,36 +65,29 @@ color: #0880D6;
 }
 
 .parent{
+  height: 80%;
   width: 35%;
   box-shadow:rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
   margin-bottom: 3%;
   margin-left: 3%;
   color: white;
-  
-  
-  
 }
 .ListeDesContacts{
-  
+  height: 100%;
   width: 54%;
-  /* height: 110px; */
   margin-right: 3%;
   margin-bottom: auto;
-  /* box-shadow:rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset; */
-  /* color: white; */
-  border-left: gray  solid 1px;
-  border-right:  gray  solid 1px;
-  border-bottom: gray solid 1px;
-  
+  /* border-left: gray  solid 1px;
+  border-right:  gray  solid 1px; */
+  border-bottom: rgb(172, 171, 171) solid 0.1rem;
 }
+
 .total{
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   margin-top: 10px;
   margin-bottom: -100%;
-  
-  
 }
 
 textarea ,label,input{
@@ -110,7 +103,7 @@ textarea ,label,input{
 
 
 .contact{
-  margin-left: 2px;
+  margin-left: 3px;
   margin-right: 20px;
   margin-top: 0px;
   padding-top: 20px;
@@ -122,11 +115,11 @@ textarea ,label,input{
  
 }
 .info{
-  height: 300px;
-  width: 700px;
+  width: 90%;
   padding-top: 25px;
   gap: 0px;
-  margin-left: 40px;
+  margin-left: 100px;
+  margin-right: 200px;
 }
 h4{
   padding-bottom: 0;
@@ -226,9 +219,10 @@ height: 50px;
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 30px;
-  border:1px solid #C4C4C4
+  border:1px solid #C4C4C4;
+  word-break :break-all;
 }
-.joinpicture{
+.join_picture{
   height: 150px;
   border: dashed 2px gray;
   margin-left: 20px;
@@ -249,7 +243,6 @@ height: 50px;
 }
 .avatar{
   clip-path:ellipse(50% 50%); 
-  /*border-radius: 50%;*/
   height: 200px;
   width: 200px;
   margin-left: 20px;
@@ -258,24 +251,29 @@ height: 50px;
 .joinImage{
   margin-left: 80px;
 } 
+.Icons{
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
 
-.delete{
+/* .delete{
+  display: flex;
   height: 50px;
- border: none;
- margin-top: 50px;
- margin-left: 20px;
- margin-right: 10px;
- background-color:white;
- 
+  border: none;
+  margin-top: 50px;
+  margin-left: 420px;
+  margin-right: 40px;
+  background-color:white;
 }
 .modify{
+  display: flex;
+  border: none;
   height: 50px;
- border: none;
- margin-top: 50px;
- margin-left: 90px;
- background-color:white;
- 
-}
+  margin-top: 50px;
+  /* margin-left: 380px; */
+  /* background-color:white;
+} */ 
 
 .fa-regular {
   color:#FF3838;
@@ -308,31 +306,28 @@ input:invalid:focus{
 
 
 
-/*================================================================ MEDIA QUERIES =============================================================================*/
+/*=================================== MEDIA QUERIES ===============================*/
 
 
 
-@media screen and (min-width: 350px) and (max-width: 900px) {
-  /* styles pour les écrans d'une largeur comprise entre 345 et 600 pixels */
+@media screen and (min-width: 350px) and (max-width: 1024px) {
+
+
   .principale {
-    /* styles pour l'élément .principale */
     display: flex;
-    flex-direction: column;
-    
+    flex-direction: column; 
   }
 
   .mynav, .mynav1, .mynav2 {
-    /* styles pour les éléments .mynav, .mynav1, .mynav2 */
+    
   }
 
   .total {
-    /* styles pour l'élément .total */
     display: flex;
     flex-direction: column;
   }
 
   .parent {
-    /* styles pour l'élément .parent */
     width: 94%;
     margin-top: 0px;
     margin-left: 15px;
@@ -341,35 +336,29 @@ input:invalid:focus{
   }
 
   .formulairedecontact {
-    /* styles pour l'élément .formulairedecontact */
-   
+    
   }
 
   .Prénom, .Nom, .Telephone, .group, .Email, .Bio {
-    /* styles pour les éléments .Prénom, .Nom, .Telephone, .group, .Email, .Bio */
+  
   }
 
   .joinpicture {
-    /* styles pour l'élément .joinpicture */
+  
   }
 
   .bouton {
-    /* styles pour l'élément .bouton */
     margin: 5px;
   }
 
   .bout1 {
-    /* styles pour les éléments .bout1 */
-   
     margin-left: 5px;
   }
   .bout2{
-    /* styles pour l'élément .bout2 */
     margin-left: -50px;
   }
 
   .ListeDesContacts {
-    /* styles pour l'élément .ListeDesContacts */
     width: 94%;
     margin-top: 0px;
     margin-left: 15px;
@@ -378,8 +367,6 @@ input:invalid:focus{
   }
 
   .contact {
-    /* styles pour les contacts */
-
    display: flex;
    flex-direction: row;
    height: 250px;
@@ -388,20 +375,18 @@ input:invalid:focus{
 
   }
   .avatar{
-    /* styles pour les images */
-
-   width: 120px;
-   height: 120px;
+    width: 80px;
+    height: 80px;
    margin-top: 15px;
    margin-left: 20px;
 
   }
   .info{
-    /* style pour les infos */
+   
     padding-top: 20px;
     height: 220px;
     font-size: 0.6em;
-    margin-right: -80px;
+    margin-right: 200px;
     margin-left: 20px;
   }
   

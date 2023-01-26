@@ -16,21 +16,19 @@
         <div class="mynav">  <p>Répertoire Des contacts</p> </div> 
 
         <div class="total">
-            <div class="parent">
-                 <form action="/send-form">
+             <div class="parent">
+                 <form >
                       <div class="mynav1">  <p>Formulaire de contact</p> </div>
-
                         <div class="formulairedecontact"><br>
-                                
-                                <input type="text" id="Id" name="id" value="new" hidden><br>
+                                <input type="number" id="id" name="id" hidden><br>
                                 <label class="Prénom" for="firstName">Prénom</label><br>
-                                <input type="text" id="Prénom" name="firstName" required minlength="3" maxlength="49" size="49"  onblur="validPrenom()"><br>
+                                <input type="text" id="Prénom" name="firstName" required minlength="3" maxlength="49" size="49" onblur="validPrenom()"><br>
                                 <p id="prenomErr"></p>
                                 <label class="Nom" for="lastName">Nom</label><br>
-                                <input type="text" id="Nom" name="lastName" required minlength="3" maxlength="49" size="49" onblur="validNom()" ><br>
+                                <input type="text" id="Nom" name="lastName" required minlength="3" maxlength="49" size="49" onblur="validNom()"><br>
                                 <p id="nomErr"></p>
                                 <label class="Telephone" for="phone">Telephone</label><br>
-                                <input type="text" id="Telephone" name="phone" required  onblur="validPhone()" ><br>
+                                <input type="text" id="Telephone" name="phone" required onblur="validPhone()"><br>
                                 <p id="phoneErr"></p>
                                 <label class="groupe" for="group">Groupe</label><br>
                                 <select class="group" name="group" required>
@@ -41,26 +39,30 @@
                                 </select><br>
 
                                 <label class="Email" for="email">Email</label><br>
-                                <input type="email" id="email" name="email" placeholder="email@.com" required onblur="validEmail()" ><br>
+                                <input type="email" id="email" name="email" placeholder="email@.com" required onblur="validEmail()"><br>
                                 <p id="errorEmail"></p>
                                 <label for="bio">Bio</label><br>
                                 <textarea name="bio" id="bio" class="Bio" cols="30" rows="6" required ></textarea>
-                                <div class="joinpicture"><label for="avatar">Deposez la photo ici <input type="file" id="avatar" name="file" accept="image/*"></label></div>
+                                <div class="join_picture">
+                                  <p class="text-image">Déposez la photo ici ou <span class="span-click">Cliquer ici</span></p> 
+                                  <input type="file" id="avatar" name="file" accept="image/*">
+                                </div>
                                 <br>
                                 <div class="bouton">
-
+                                  
                                     <button class="bout1" role="button">Créer</button>
                                     <button class="bout2" role="button">Rénit</button> <br><br><br> <br>
 
                                  </div>
 
                         </div>
-                  </form>
+                 </form>
             </div>
 
 
                   <div class="ListeDesContacts">
                     <div class="mynav2">  <p>Liste des contacts</p> </div> <br>
+                    <div class="afficheMe"></div>
                   </div>
                     
          </div>
