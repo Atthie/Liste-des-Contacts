@@ -220,8 +220,10 @@ join_picture.addEventListener('drop', (event) => {
 
 form.addEventListener('submit', (event)=>{
   event.preventDefault();
- 
+ if ( document.getElementById('id').value == '') {
   document.getElementById('id').value = tab.length;
+ }
+  
   const contacts = Object.fromEntries(new FormData(form)) ;
 console.log(contacts);
   if(Object.keys(Erreurs).length === 0 ){
@@ -230,7 +232,7 @@ console.log(contacts);
     console.log(tab)
     afficher()
   }
-
+  form.reset();
 })
 
 form.reset();
@@ -257,6 +259,7 @@ function afficher(){
       </div>
     `
     afficheMe.append(div)
+
   });
 
 }
@@ -273,15 +276,32 @@ function deleteElement(valeur){
 
 function edit(valeur)
 {
-  const selectEdit= tab.filter(edit => edit.id == valeur);
-  document.getElementById('id').value = edit.id;
-  document.querySelector('#Prénom');
-  document.querySelector('#Nom');
-  document.querySelector('#Telephone');
-  document.querySelector('.group');
-  document.querySelector('#email');
-  document.querySelector('#bio');
-     
+  //const selectEdit= tab.filter(edit => edit.id == valeur);
+  //console.log(tab[valeur]);
+ 
+  document.getElementById('id').value = valeur;
+  document.getElementById('Prénom').value = tab[valeur].firstName;
+  document.getElementById('Nom').value = tab[valeur].lastName;
+  document.getElementById('Telephone').value = tab[valeur].phone;
+  document.getElementsByClassName('group').value = tab[valeur].group;
+  document.getElementById('email').value = tab[valeur].email;
+  document.getElementById('bio').value = tab[valeur].bio;
+  
+  
+  createButton.innerHTML= 'Modifier';
+  resetButton.innerHTML= 'Annuler'
+
+  createButton.addEventListener('click', function(){
+    createButton.innerHTML='Creer'
+    resetButton.innerHTML='Reinit'
+  });
+
+  resetButton.addEventListener('click', function(){
+    createButton.innerHTML='Creer'
+    resetButton.innerHTML='Reinit'
+  });
+  afficher();
+  tab.splice(valeur,1)
 }
 
    
