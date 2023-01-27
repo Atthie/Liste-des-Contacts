@@ -1,6 +1,5 @@
 *{
   margin: 0;
- 
   padding:0;
 }
 .principale{
@@ -118,8 +117,8 @@ textarea ,label,input{
   width: 90%;
   padding-top: 25px;
   gap: 0px;
-  margin-left: 100px;
-  margin-right: 200px;
+  margin-left: 300px;
+  margin-right: 50px;
 }
 h4{
   padding-bottom: 0;
@@ -223,6 +222,7 @@ height: 50px;
   word-break :break-all;
 }
 .join_picture{
+  width: 96%;
   height: 150px;
   border: dashed 2px gray;
   margin-left: 20px;
@@ -253,27 +253,24 @@ height: 50px;
 } 
 .Icons{
   display: flex;
-  justify-content: flex-end;
+  position: absolute;
+  margin-top: 20px;
+  margin-left: 900px;
   gap: 20px;
 }
 
-/* .delete{
+ .delete{
   display: flex;
   height: 50px;
   border: none;
-  margin-top: 50px;
-  margin-left: 420px;
-  margin-right: 40px;
   background-color:white;
 }
 .modify{
   display: flex;
   border: none;
   height: 50px;
-  margin-top: 50px;
-  /* margin-left: 380px; */
-  /* background-color:white;
-} */ 
+  background-color:white;
+} 
 
 .fa-regular {
   color:#FF3838;
@@ -382,14 +379,18 @@ input:invalid:focus{
 
   }
   .info{
-   
     padding-top: 20px;
     height: 220px;
     font-size: 0.6em;
     margin-right: 200px;
     margin-left: 20px;
   }
-  
+  .Icons{
+    display: flex;
+    position: absolute;
+    margin-left: 80%;
+    gap: 20px;
+  }
   .modify{
     margin-right: 5px;
   }
@@ -399,4 +400,5 @@ input:invalid:focus{
   }
   
 }
+
 

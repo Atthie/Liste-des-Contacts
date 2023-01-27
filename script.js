@@ -15,138 +15,86 @@ const resetButton = document.querySelector('.bout2');
 const afficheMe = document.querySelector('.afficheMe');
 const tab = []
 const Erreurs = {}
+let fileURL;
+
 
 //=======First Name Validation=========
-function validPrenom(){
-  let prenom = form.elements.Prénom.value
-  if (prenom.length < 3) {
-      if (prenom.length === 0) {
-          document.getElementById("Prénom").style.borderColor = "red";
-          document.getElementById("prenomErr").style.color="red"
-          document.getElementById("prenomErr").innerHTML = `<p><span class="warning__Icon"><i class="fa-solid fa-circle-exclamation"></i></span>Ce champ est obligatoire!!!</p>`;
-          Object.defineProperty(Erreurs, "prenom",{
-            value:"Ce champ est obligatoire!!!",
-            writable:true,
-            enumerable:true,
-            configurable:true
-          });
-        }else{
-      document.getElementById("Prénom").style.borderColor = "red";
-      document.getElementById("prenomErr").style.color="red"
-      document.getElementById("prenomErr").innerHTML = `<p><span class="warning__Icon"><i class="fa-solid fa-circle-exclamation"></i></span>renseigner un nom avec plus de 3 caractères</p>`;
-      Object.defineProperty(Erreurs, "prenom",{
-        value:"renseigner un nom avec plus de 3 caractères",
-        writable:true,
-        enumerable:true,
-        configurable:true
-      });
+function validPrenom() {
+  let prenom = form.elements.Prénom.value;
+  let errorMessage = prenom.length === 0 ? "Ce champ est obligatoire!!!" : prenom.length < 3 ? "Renseigner un nom avec plus de 3 caractères" : prenom.length > 50 ? "Renseigner un nom avec moins de 50 caractères" : "";
+  if (errorMessage) {
+    Object.defineProperty(Erreurs, "prenom", {
+      value: errorMessage,
+      writable: true,
+      enumerable: true,
+      configurable: true
+    });
+    document.getElementById("Prénom").style.borderColor = "red";
+    document.getElementById("prenomErr").style.color = "red";
+    document.getElementById("prenomErr").innerHTML = `<p><span class="warning__Icon"><i class="fa-solid fa-circle-exclamation"></i></span>${errorMessage}</p>`;
+  } else {
+    delete Erreurs.prenom;
+    document.getElementById("Prénom").style.borderColor = "";
+    document.getElementById("prenomErr").style.color = "";
+    document.getElementById("prenomErr").innerHTML = "";
   }
-    }else if (prenom.length > 50) {
-      document.getElementById("Prénom").style.borderColor = "red";
-      document.getElementById("prenomErr").style.color="red"
-      document.getElementById("prenomErr").innerHTML = `<p><span class="warning__Icon"><i class="fa-solid fa-circle-exclamation"></i></span>renseigner un nom avec moin de 50 caractères</p>`;
-      
-      Object.defineProperty(Erreurs, "prenom",{
-        value:"renseigner un nom avec moin de 50 caractères",
-        writable:true,
-        enumerable:true,
-        configurable:true
-      });
-    }else{
-      document.getElementById("Prénom").style.borderColor = "";
-          document.getElementById("prenomErr").style.color=""
-          document.getElementById("prenomErr").innerHTML = "";
-          delete Erreurs.prenom;
-    }
 }
+
+
 
 //=============Name Validation==============
 function validNom(){
-  let nom = form.elements.Nom.value
-  if (nom.length < 3) {
-      if (nom.length === 0) {
-          document.getElementById("Nom").style.borderColor = "red";
-          document.getElementById("nomErr").style.color="red"
-          document.getElementById("nomErr").innerHTML = `<p><span class="warning__Icon"><i class="fa-solid fa-circle-exclamation"></i></span>Ce champ est obligatoire!!!</p>`;
-          Object.defineProperty(Erreurs, "nom",{
-            value:"Ce champ est obligatoire!!!",
-            writable:true,
-            enumerable:true,
-            configurable:true
-          });
-        }else{
-      document.getElementById("Nom").style.borderColor = "red";
-      document.getElementById("nomErr").style.color="red"
-      document.getElementById("nomErr").innerHTML = `<p><span class="warning__Icon"><i class="fa-solid fa-circle-exclamation"></i></span>renseigner un nom avec plus de 3 caractères</p>`;
-      
-      Object.defineProperty(Erreurs, "nom",{
-        value:"renseigner un nom avec plus de 3 caractères",
-        writable:true,
-        enumerable:true,
-        configurable:true
-      });
+  let nom = form.elements.Nom.value;
+  let errorMessage = "";
+  if (nom.length === 0) {
+    errorMessage = "Ce champ est obligatoire!!!";
+  } else if (nom.length < 3) {
+    errorMessage = "Renseigner un nom avec plus de 3 caractères";
+  } else if (nom.length > 50) {
+    errorMessage = "Renseigner un nom avec moins de 50 caractères";
   }
-    }else if (nom.length > 50) {
-      document.getElementById("Nom").style.borderColor = "red";
-      document.getElementById("nomErr").style.color="red"
-      document.getElementById("nomErr").innerHTML = `<p><span class="warning__Icon"><i class="fa-solid fa-circle-exclamation"></i></span>renseigner un nom avec moin de 50 caractères</p>`;
-      
-      Object.defineProperty(Erreurs, "nom",{
-        value:"renseigner un nom avec moin de 50 caractères",
-        writable:true,
-        enumerable:true,
-        configurable:true
-      });
-    }else{
-      document.getElementById("Nom").style.borderColor = "";
-          document.getElementById("nomErr").style.color=""
-          document.getElementById("nomErr").innerHTML = "";
-          delete Erreurs.nom;
-    }
+  if (errorMessage) {
+    document.getElementById("Nom").style.borderColor = "red";
+    document.getElementById("nomErr").style.color = "red";
+    document.getElementById("nomErr").innerHTML = `<p><span class="warning__Icon"><i class="fa-solid fa-circle-exclamation"></i></span>${errorMessage}</p>`;
+    Erreurs.nom = errorMessage;
+  } else {
+    document.getElementById("Nom").style.borderColor = "";
+    document.getElementById("nomErr").innerHTML = "";
+    delete Erreurs.nom;
+  }
 }
 
 //==========Validation Number=========
-function validPhone(){
-  let Telephone = form.elements.Telephone.value;
-  let phoneRegex = /^\d+$/;
-  let validPrefixes = ["084", "085", "080", "089", "081", "082", "083", "099", "097", "097", "090"];
-  if(!phoneRegex.test (Telephone)){
-    document.getElementById('Telephone').style.borderColor ='red';
-    document.getElementById('phoneErr').style.color='red'
-    document.getElementById('phoneErr').innerHTML = `<p><span class="warning__Icon"><i class="fa-solid fa-circle-exclamation"></i></span>Renseigner un numéro de téléphone valide</p>`;
-    Object.defineProperty(Erreurs, "phone",{
-      value:"Renseigner un numéro de téléphone valide",
-      writable:true,
-      enumerable:true,
-      configurable:true
-    });
-  }else if (Telephone.length !== 10 ){
-    document.getElementById('Telephone').style.borderColor = 'red';
-    document.getElementById('phoneErr').style.color = 'red'
-    document.getElementById('phoneErr').innerHTML = `<p><span class="warning__Icon"><i class="fa-solid fa-circle-exclamation"></i></span>Renseigner un numéro de téléphone avec au moins 10 chiffres</p>`;
-    
-    Object.defineProperty(Erreurs, "phone",{
-      value:"Renseigner un numéro de téléphone avec au moins 10 chiffres",
-      writable:true,
-      enumerable:true,
-      configurable:true
-    });
-  }else if (!validPrefixes.includes(Telephone.substring(0, 3))) {
-    document.getElementById('Telephone').style.borderColor = 'red';
-    document.getElementById('phoneErr').style.color = 'red';
-    document.getElementById('phoneErr').innerHTML = `<p><span class="warning__Icon"><i class="fa-solid fa-circle-exclamation"></i></span>Renseigner un numéro de téléphone au format valide</p>`;
-    Object.defineProperty(Erreurs, "phone",{
-      value:"Renseigner un numéro de téléphone au format valide",
-      writable:true,
-      enumerable:true,
-      configurable:true
-    });
-  }else{
-    document.getElementById('Telephone').style.borderColor ='';
-    document.getElementById('phoneErr').style.color =''
-    document.getElementById('phoneErr').innerHTML = '';
-    delete Erreurs.phone;
+const validPhone = () => {
+  const Telephone = form.elements.Telephone.value;
+  const phoneRegex = /^\d+$/;
+  const validPrefixes = ["084", "085", "080", "089", "081", "082", "083", "099", "097", "097", "090"];
+  const phoneErr = document.getElementById('phoneErr');
+  const phoneInput = document.getElementById('Telephone');
+  
+  if(!phoneRegex.test(Telephone)) {
+    setInvalid(phoneInput, phoneErr, "Ce champ est obligatoire!!!", "phone");
+  } else if(Telephone.length !== 10){
+    setInvalid(phoneInput, phoneErr, "Renseigner un numéro de téléphone avec au moins 10 chiffres", "phone");
+  } else if(!validPrefixes.includes(Telephone.substring(0,3))) {
+    setInvalid(phoneInput, phoneErr, "Renseigner un numéro de téléphone au format valide", "phone");
+  } else {
+    setValid(phoneInput, phoneErr, "phone");
   }
+}
+const setInvalid = (input, errorNode, errorMessage, errorKey) => {
+    input.style.borderColor = 'red';
+    errorNode.style.color = 'red';
+    errorNode.innerHTML = `<p><span class="warning__Icon"><i class="fa-solid fa-circle-exclamation"></i></span>${errorMessage}</p>`;
+    Erreurs[errorKey] = errorMessage;
+}
+
+const setValid = (input, errorNode, errorKey) => {
+    input.style.borderColor = '';
+    errorNode.style.color = '';
+    errorNode.innerHTML = '';
+    delete Erreurs[errorKey];
 }
 
 // =======validation email=========
@@ -165,6 +113,7 @@ function validEmail() {
       return true;
     }
 }
+
 
 avatarInput.onclick =() => {
   file = avatarInput.files[0]
@@ -216,22 +165,38 @@ join_picture.addEventListener('drop', (event) => {
       delete Erreurs.image;
 }
 });
-
+function displayImg(){
+  let fileReader = new FileReader()
+  fileReader.onload = () => {
+      fileURL = fileReader.result;
+      let imgTag = `<img src = "${fileURL}" alt = "" >`;
+      join_picture.innerHTML = imgTag;
+  }
+  fileReader.readAsDataURL(file);
+}
 
 form.addEventListener('submit', (event)=>{
   event.preventDefault();
- if ( document.getElementById('id').value == '') {
-  document.getElementById('id').value = tab.length;
- }
+ 
   
-  const contacts = Object.fromEntries(new FormData(form)) ;
-console.log(contacts);
+  const contacts = Object.fromEntries(new FormData(form));
+  contacts.photo = fileURL
+  console.log(contacts)
+
   if(Object.keys(Erreurs).length === 0 ){
 
-    tab.push(contacts)
-    console.log(tab)
+    if ( document.getElementById('id').value == '') {
+      tab.push(contacts)
+        
+     }else{
+      tab[document.getElementById('id')] = (contacts)
+     }
     afficher()
   }
+  document.getElementById('id').value = ''
+  let imgTag = `<img src = "" alt = "" >`;
+  // join_picture.innerHTML = '';
+  join_picture.innerHTML = `<p class="text-image">Déposez la photo ici ou <span class="span-click">Cliquer ici</span></p>`
   form.reset();
 })
 
@@ -247,22 +212,25 @@ function afficher(){
     const div = document.createElement('div')
     div.classList.add('info')
     div.innerHTML = `
-     
+    <div class="Icons">
+    <button class="modify"  onclick = "edit(${index})"> <a class="icon iconnoir " href="#"> <i class="fa-solid fa-user-pen"></i></a></button>
+    <button class="delete" onclick = "deleteElement(${index})" > <a class="icon iconred " href="#"><i class="fa-regular fa-trash-can"></i></a></button> 
+    </div>
+    <div>
+    <img src="${contact.photo}">
+    </div>
       <h4>${contact.firstName} ${contact.lastName}</h4>
       <p>Téléphone: ${contact.phone}</p>
       <p>Groupe: ${contact.group}</p>
       <p>Email: <a href="mailto:${contact.email}?subject=Bonjour%20${contact.firstName}%20${contact.lastName}&body=Bonjour%20${contact.firstName},%0A%0A%0A%0A%0A%0A%0A%0AMes%20meilleures%20salutations%0A%0A${contact.lastName}">${contact.email}</a></p>
       <p>Bio: ${contact.bio}</p>
-      <div class="Icons">
-      <button class="modify"  onclick = "edit(${index})"> <a class="icon iconnoir " href="#"> <i class="fa-solid fa-user-pen"></i></a></button>
-      <button class="delete" onclick = "deleteElement(${index})" > <a class="icon iconred " href="#"><i class="fa-regular fa-trash-can"></i></a></button> 
-      </div>
     `
     afficheMe.append(div)
 
   });
 
 }
+
 
 function deleteElement(valeur){
   let text = "Voulez vous supprimez ce contact?";
@@ -274,10 +242,12 @@ function deleteElement(valeur){
  
 }
 
+
 function edit(valeur)
 {
   //const selectEdit= tab.filter(edit => edit.id == valeur);
   //console.log(tab[valeur]);
+
  
   document.getElementById('id').value = valeur;
   document.getElementById('Prénom').value = tab[valeur].firstName;
